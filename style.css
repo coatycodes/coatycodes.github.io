@@ -342,6 +342,7 @@ h2 {
     
     .box {
         background: #121212;
+        height: 100%;
     }
     
     .box-container {
