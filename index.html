@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamer's Block</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://www.nicepng.com/png/full/1009-10091697_gamepad-wire-svg-png-icon-free-download-game.png">
+</head>
+<body>
+    <nav>
+    <div class="logo">gamersblock <span class="beta" style="position:relative; top:-5.5px;">BETA</span></div>
+    <div class="nav-items">
+        <a href= "https://www.linkedin.com/in/cody-krug/" target="_blank">CONTACT DEV</a>
+    </div>
+    </nav>
+    <section class="box">
+        <div class="box-container">
+            <div class="column-center">
+                <h1>For Gamers By Gamers</h1>
+                <p class="secondText">You've heard of writer's block, gamers have the same problem.</p>
+                <p class="secondText"> Let us help you find a game when you just simply can't find one. </p>
+                <p class="secondText">Sometimes all you need is a little push, we've started with one below.</p>
+            </div>
+            <div class="gameCard">
+                <h2></h2>
+                <div class="infoCon">
+                  <ul class="overflowScroll" style= "padding-right: 15px;"> 
+                  </ul>
+                  <button onClick="window.location.reload();" class="gameButton">FIND NEW GAME</button>
+            </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function randomIntFromInterval(min, max) { 
+         return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+        const rndInt = randomIntFromInterval(1, 3948)
+        
+        let newFetch = 'https://api.rawg.io/api/games/' + rndInt + '?key=45f4c138c2e74985868509cb94bfcfc0';
+        
+        fetch(newFetch)
+        .then(res => {
+            return res.json();
+        })
+        
+        .then(data => {
+           let title = `<h2 class="title">${data.name}</h2>`;
+           let description = `<div class="thirdText">${data.description}</div>`;
+           let websiteLink = `<a href=${data.website} target="_blank" class="website"> Website (if one is available)</a>`
+           let image = `<img src=${data.background_image} class="card-image" id="test">`
+           document.querySelector('ul').insertAdjacentHTML('beforeend', title);
+           document.querySelector('ul').insertAdjacentHTML('beforeend', description);
+           document.querySelector('ul').insertAdjacentHTML('beforeend', websiteLink);
+           document.querySelector('h2').insertAdjacentHTML('beforeend', image);
+        })
+        .catch(error => console.log(error));
+    </script>
+</body>
+</html>
